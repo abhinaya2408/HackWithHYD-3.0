@@ -2,7 +2,7 @@
 
 Everything on this page is computed deterministically in Python so it renders
 instantly and the Product Manager can trust the numbers. Narrative reasoning (which
-costs a Groq call) lives on the Insights and Ask PulseMind pages.
+costs a model call) lives on the Insights and Ask PulseMind pages.
 """
 
 from __future__ import annotations
@@ -17,65 +17,55 @@ from services import trend_analyzer as trends
 from ui import components as ui
 
 
-def _memory_strip(agent: PulseMindAgent, overview: dict | None) -> None:
-    """Memory status block so Hindsight is visually obvious at a glance."""
+def _memory_summary(agent: PulseMindAgent) -> None:
+    """What PulseMind remembers — a product signal, never system telemetry."""
     with ui.card():
         ui.section(
-            "Hindsight memory status",
+            "What PulseMind remembers",
             "Long-term memory is what makes PulseMind more than a dashboard: it holds "
-            "earlier feedback, product changes, measured outcomes and PM decisions.",
+            "earlier feedback, product changes, measured outcomes and product decisions.",
         )
         if not agent.memory.is_started:
             ui.empty_state(
-                "Hindsight is not running",
-                "Open Memory Explorer to start it. Metrics below still come from the dataset.",
+                "Long-term memory is not available",
+                "Open Memory Explorer to connect it. Every metric on this page still comes "
+                "from the feedback dataset.",
             )
             return
-        status = agent.memory.status()
-        counts = (overview or {}).get("counts", {})
+        overview = agent.memory_overview()
+        counts = overview.get("counts", {})
         badges = [
-            ui.badge(f"{counts.get(kind, 0)} {MEMORY_KIND_LABELS.get(kind, kind).lower()}",
-                     "primary" if kind == "product_change" and counts.get(kind) else "muted")
+            ui.badge(
+                f"{counts.get(kind, 0)} {MEMORY_KIND_LABELS.get(kind, kind).lower()}",
+                "soft" if counts.get(kind) else "muted",
+            )
             for kind in MEMORY_KIND_LABELS
         ]
         ui.badge_row(badges)
-        ui.key_values(
-            [
-                ("Total memory units", str((overview or {}).get("total", 0))),
-                ("Mode", str(status.get("mode", "—"))),
-                ("Bank", str(status.get("bank_id", "—"))),
-                ("Memory LLM", str(status.get("llm_model", "—"))),
-            ]
-        )
+        st.caption(f"**{overview.get('total', 0):,} memories** retained in total.")
 
 
-def render(agent: PulseMindAgent) -> None:
-    ui.page_header(
-        "Executive Dashboard",
-        "The current state of customer feedback, the themes driving it, and whether our "
-        "shipped changes actually moved the numbers.",
-        eyebrow="PulseMind",
-    )
+def _body(agent: PulseMindAgent) -> None:
     frame = agent.frame
     period_list = agent.periods()
     if not period_list:
         ui.empty_state(
-            "No feedback loaded",
-            "Run `python data/prepare_dataset.py demo` and reload the page.",
+            "No feedback yet",
+            "Load the demo dataset, then reload this page — the dashboard builds itself from it.",
         )
         return
 
     latest = period_list[-1]
     ui.badge_row(
         [
-            ui.badge(f"{len(frame)} feedback items", "pm"),
+            ui.badge(f"{len(frame)} feedback items", "pm", icon_name="feedback"),
             ui.badge(f"{len(period_list)} periods", "pm"),
-            ui.badge(f"focus period: {latest}", "primary"),
+            ui.badge(f"Latest period: {latest}", "primary"),
         ]
     )
     st.caption(
-        f"Dataset spans {period_list[0]} → {latest}. Everything below is computed in "
-        "Python from this dataset and the Hindsight memory bank."
+        f"The dataset spans {period_list[0]} → {latest}. Every number below is computed in "
+        "Python from that dataset and the memories retained for it."
     )
 
     # ------------------------------------------------------------------
@@ -102,10 +92,7 @@ def render(agent: PulseMindAgent) -> None:
     )
 
     st.write("")
-    overview = agent.memory_overview() if agent.memory.is_started else None
-    _memory_strip(agent, overview)
-
-    st.divider()
+    _memory_summary(agent)
 
     # ------------------------------------------------------------------
     # Trends
@@ -154,8 +141,6 @@ def render(agent: PulseMindAgent) -> None:
                     f"{abs(signal.share_delta_pts):.1f} points to {signal.latest_share:.1f}% "
                     f"of complaints."
                 )
-
-    st.divider()
 
     # ------------------------------------------------------------------
     # Product impact — did our change improve the problem?
@@ -221,21 +206,36 @@ def render(agent: PulseMindAgent) -> None:
             ui.before_after_chart(comparison.as_dict())
             st.caption(
                 "This verdict is computed in Python from the two measurement windows. "
-                "Open **Insights** to have PulseMind reason over it together with the "
-                "memories it retained from before the change."
+                "Open **Insights** to reason over it together with the memories retained "
+                "from before the change."
             )
 
-    st.divider()
-    with st.expander("Latest complaints (newest first)"):
+    with st.expander("Latest complaints (newest first)", icon=":material/forum:"):
         recent = trends.recent_complaints(frame, latest, limit=10)
+        if not recent:
+            ui.empty_state("No complaints in this period")
         for row in recent:
             ui.badge_row(
                 [
                     ui.badge(str(row["date"]), "muted"),
                     ui.badge(str(row["product_area"]), "pm"),
                     ui.badge(ui.theme_label(row["theme"]), "muted"),
-                    ui.badge(f"rating {row['rating']}/5", "error" if row["rating"] <= 2 else "muted"),
+                    ui.badge(
+                        f"rating {row['rating']}/5",
+                        "error" if row["rating"] <= 2 else "muted",
+                    ),
                 ]
             )
             st.markdown(f"{row['text']}")
             st.divider()
+
+
+def render(agent: PulseMindAgent) -> None:
+    ui.page_header(
+        "Executive Dashboard",
+        "The current state of customer feedback, the themes driving it, and whether our "
+        "shipped changes actually moved the numbers.",
+        eyebrow="Overview",
+    )
+    with ui.guard("Executive Dashboard", retry_key="retry_dashboard"):
+        _body(agent)

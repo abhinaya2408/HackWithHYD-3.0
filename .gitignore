@@ -21,3 +21,6 @@ data/raw/
 # Embedded Hindsight / Postgres leftovers
 .pg0/
 *.log
+
+# Local PulseMind preferences (profile + appearance)
+.pulsemind/

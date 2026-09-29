@@ -1,0 +1,23 @@
+# PulseMind — Streamlit runtime configuration.
+#
+# `showErrorDetails = "none"` is the safety net behind the UI's own error components:
+# Streamlit will never print a Python traceback into the browser, so a failure is always
+# the on-brand "We couldn't load this right now" block with a Retry button instead.
+# The full error still reaches the server console through the `logging` module.
+
+[client]
+showErrorDetails = "none"
+toolbarMode = "minimal"
+showSidebarNavigation = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+# Starting values only — the Appearance setting in the app re-themes at runtime from
+# ui/theme.py, which is the single source of truth for every visual token.
+base = "light"
+primaryColor = "#ff385c"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f7f7f7"
+textColor = "#222222"

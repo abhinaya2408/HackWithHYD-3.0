@@ -3,13 +3,13 @@
 The AI never invents a release or a release date. Changes arrive one of two ways:
 
 * manually, from the form on this page; or
-* automatically, when engineering merges a PR or publishes a release in the configured
-  GitHub repository and the webhook receiver retains it in Hindsight.
+* automatically, when engineering merges a PR or publishes a release in the connected
+  GitHub repository and the webhook receiver retains it in long-term memory.
 
-Either way each change both lands in `data/product_changes.csv` and is RETAINED in
-Hindsight, so later analysis can connect feedback to the change and measure whether it
+Either way each change both lands in the product-changes dataset and is retained as a
+memory, so later analysis can connect feedback to the change and measure whether it
 worked. This page makes the source, the GitHub metadata and the retention status of
-every change visually explicit.
+every change visible.
 """
 
 from __future__ import annotations
@@ -83,10 +83,10 @@ def _render_change(agent: PulseMindAgent, change, retention: dict) -> None:
             ui.key_values(_github_metadata(change))
             url = str(change.get("github_url", "") or "")
             if url:
-                st.link_button("Open on GitHub ↗", url)
+                st.link_button("Open on GitHub", url, icon=":material/open_in_new:")
             st.caption(
-                "PulseMind received a signed GitHub webhook for this event and retained "
-                "the change in Hindsight as a product-change memory."
+                "This change arrived from a signed GitHub event and was retained in "
+                "long-term memory as a product change."
             )
         else:
             ui.key_values(
@@ -102,10 +102,12 @@ def _render_change(agent: PulseMindAgent, change, retention: dict) -> None:
 
         columns = st.columns([1, 3])
         if columns[0].button("Measure outcome", key=f"measure_{change['change_id']}"):
-            with st.spinner("Comparing the windows before and after the change…"):
-                comparison, receipt = agent.measure_outcome(str(change["change_name"]))
+            comparison, receipt = agent.measure_outcome(str(change["change_name"]))
             if comparison is None:
-                st.error("Could not match this change to the feedback data.")
+                ui.warning_state(
+                    "We couldn't match this change to the feedback data",
+                    "Check the product area and release date, then measure again.",
+                )
             else:
                 st.session_state[f"outcome_{change['change_id']}"] = comparison.as_dict()
                 st.session_state[f"outcome_receipt_{change['change_id']}"] = (
@@ -132,44 +134,16 @@ def _render_change(agent: PulseMindAgent, change, retention: dict) -> None:
             ui.before_after_chart(stored)
             if st.session_state.get(f"outcome_receipt_{change['change_id']}"):
                 st.success(
-                    "Retained the measured outcome in Hindsight: future analysis will "
+                    "Retained the measured outcome in long-term memory: future analysis will "
                     "recall what happened after this change."
                 )
             st.caption(
-                f"Topic used for the comparison: {ui.theme_label(theme) if theme else 'all topics in this area'}."
+                f"Topic used for the comparison: "
+                f"{ui.theme_label(theme) if theme else 'all topics in this area'}."
             )
 
 
-def render(agent: PulseMindAgent) -> None:
-    ui.page_header(
-        "Product Changes",
-        "Recorded changes are the bridge between feedback and outcomes. Each change is "
-        "stored in data/product_changes.csv and retained in Hindsight with the problem it "
-        "targeted and the outcome that was expected.",
-        eyebrow="PulseMind",
-    )
-
-    changes = agent.changes
-    github_count = (
-        int((changes["source"].astype(str) == "github").sum()) if not changes.empty else 0
-    )
-    ui.badge_row(
-        [
-            ui.badge(f"{len(changes)} recorded changes", "primary"),
-            ui.badge(f"{github_count} from GitHub", "github"),
-            ui.badge(f"{len(changes) - github_count} from Product Manager", "pm"),
-        ]
-    )
-    if not agent.memory.is_started:
-        st.warning(
-            "Hindsight is not running, so changes are saved to the CSV only and cannot be "
-            "retained as memory. Open **Memory Explorer** to start it."
-        )
-    st.write("")
-
-    # ------------------------------------------------------------------
-    # Add a change
-    # ------------------------------------------------------------------
+def _record_form(agent: PulseMindAgent) -> None:
     with ui.card():
         ui.section(
             "Record a product change",
@@ -195,53 +169,90 @@ def render(agent: PulseMindAgent) -> None:
                 placeholder="Reduce checkout complaints and cart abandonment",
                 height=80,
             )
-            submitted = st.form_submit_button("Save and retain in Hindsight", type="primary")
+            submitted = st.form_submit_button("Save and retain", type="primary")
 
-    if submitted:
-        if not name.strip():
-            st.error("A change name is required.")
-        elif not problem.strip():
-            st.error(
-                "The problem targeted is required — without it PulseMind cannot connect "
-                "the change to the feedback it was meant to fix."
-            )
-        else:
-            change = {
-                "change_id": "",
-                "date": released.isoformat(),
-                "change_name": name.strip(),
-                "product_area": area,
-                "problem_targeted": problem.strip(),
-                "expected_outcome": expected.strip() or "not specified",
-            }
-            with st.spinner("Saving and retaining in Hindsight…"):
-                path, receipt = agent.record_product_change(change)
-            if receipt.ok:
-                st.success(
-                    f"Recorded **{change['change_name']}** in `{_display_name(path)}` and retained "
-                    "it in Hindsight as a product-change memory."
-                )
-            else:
-                st.warning(
-                    f"Saved to `{_display_name(path)}`, but the Hindsight retain call failed: "
-                    f"{receipt.error}"
-                )
-            st.rerun()
+    if not submitted:
+        return
 
-    st.divider()
+    if not name.strip():
+        ui.warning_state(
+            "Give the change a name",
+            "A short name like “Checkout V2” is how PulseMind refers to this change later.",
+        )
+        return
+    if not problem.strip():
+        ui.warning_state(
+            "Describe the problem this change targeted",
+            "Without it PulseMind cannot connect the change to the feedback it was meant to fix.",
+        )
+        return
 
-    # ------------------------------------------------------------------
-    # Existing changes
-    # ------------------------------------------------------------------
+    change = {
+        "change_id": "",
+        "date": released.isoformat(),
+        "change_name": name.strip(),
+        "product_area": area,
+        "problem_targeted": problem.strip(),
+        "expected_outcome": expected.strip() or "not specified",
+    }
+    try:
+        with st.spinner("Saving the change…"):
+            path, receipt = agent.record_product_change(change)
+    except Exception as exc:  # noqa: BLE001 - a failed save must not leak a traceback
+        ui.error_state(
+            exc,
+            section="Record product change",
+            title="We couldn't save that change",
+            body="Nothing was written. Please try again in a moment.",
+        )
+        return
+
+    if receipt.ok:
+        st.success(
+            f"Recorded **{change['change_name']}** in `{_display_name(path)}` and retained it "
+            "in long-term memory."
+        )
+    else:
+        ui.log_failure("Retain product change", str(receipt.error))
+        ui.warning_state(
+            f"Saved {change['change_name']}, but not yet retained as memory",
+            "The change is in the dataset. Use Retain on the change below to try the memory "
+            "write again.",
+        )
+    st.rerun()
+
+
+def _body(agent: PulseMindAgent) -> None:
+    changes = agent.changes
+    github_count = (
+        int((changes["source"].astype(str) == "github").sum()) if not changes.empty else 0
+    )
+    ui.badge_row(
+        [
+            ui.badge(f"{len(changes)} recorded changes", "primary", icon_name="change"),
+            ui.badge(f"{github_count} from GitHub", "github"),
+            ui.badge(f"{len(changes) - github_count} from Product Manager", "pm"),
+        ]
+    )
+    if not agent.memory.is_started:
+        ui.warning_state(
+            "Long-term memory is not available",
+            "Changes are still saved to the dataset, but they cannot be retained as memory "
+            "yet. Open Memory Explorer to connect it.",
+        )
+    st.write("")
+
+    _record_form(agent)
+
     ui.section(
         f"Recorded changes ({len(changes)})",
         "Newest first. GitHub changes show repository, PR/release reference, version and link.",
     )
     if changes.empty:
         ui.empty_state(
-            "No product changes recorded yet",
-            "Record one above, or let a merged PR / published release arrive through the "
-            "GitHub webhook receiver.",
+            "No product changes yet",
+            "Record one above, or let a merged pull request or published release arrive "
+            "automatically from GitHub.",
         )
         return
 
@@ -249,16 +260,26 @@ def render(agent: PulseMindAgent) -> None:
     for _, change in changes.sort_values("date", ascending=False).iterrows():
         _render_change(agent, change, retention)
 
-    st.divider()
-    with st.expander("Raw product_changes.csv"):
+    with st.expander("Dataset rows", icon=":material/table:"):
         st.dataframe(
             changes.assign(date=changes["date"].dt.strftime("%Y-%m-%d")),
             width="stretch",
             hide_index=True,
         )
     st.caption(
-        "Product changes also arrive automatically: when engineering merges a PR or "
-        "publishes a release in the configured GitHub repository, the webhook receiver "
-        "(`python -m core.github_webhook`) verifies the event and retains it here as a "
-        "product-change memory."
+        "Product changes also arrive automatically: when engineering merges a pull request "
+        "or publishes a release in the connected repository, the change is verified and "
+        "retained here."
     )
+
+
+def render(agent: PulseMindAgent) -> None:
+    ui.page_header(
+        "Product Changes",
+        "Recorded changes are the bridge between feedback and outcomes. Each change is stored "
+        "in the dataset and retained as memory with the problem it targeted and the outcome "
+        "that was expected.",
+        eyebrow="Timeline",
+    )
+    with ui.guard("Product Changes", retry_key="retry_changes"):
+        _body(agent)

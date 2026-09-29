@@ -4,16 +4,18 @@ Run with:
 
     streamlit run app.py
 
-The app boots one PulseMindAgent per Streamlit process. That agent owns the Groq
-client and the Hindsight memory connection (embedded by default), so the memory bank
-is started once and reused across every page rerun.
+The app boots one PulseMindAgent per Streamlit process. That agent owns the Groq client
+and the Hindsight memory connection (embedded by default), so the memory bank is started
+once and reused across every page rerun.
 
-Visual design follows the Airbnb DESIGN.md system (see ``DESIGN.md`` and
-``ui/theme.py``): coral accent, white canvas, rounded cards, generous spacing and
-modest-weight typography.
+All visual decisions live in ``ui/theme.py`` (tokens + CSS), all shared UI in
+``ui/components.py``, and the two user preferences in ``ui/state.py``. This module only
+composes them: sidebar chrome, page routing and one top-level error net.
 """
 
 from __future__ import annotations
+
+import logging
 
 import streamlit as st
 
@@ -28,6 +30,14 @@ from ui import (
     product_changes,
 )
 from ui import components as ui
+from ui import settings as settings_page
+from ui import state as user_state
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
+logger = logging.getLogger("pulsemind.app")
 
 PAGES = {
     "Executive Dashboard": dashboard.render,
@@ -38,39 +48,56 @@ PAGES = {
     "Ask PulseMind": ask_pulsemind.render,
 }
 
+# Settings lives at the bottom of the sidebar, outside the numbered product pages.
+SETTINGS_PAGES = {
+    "Settings": settings_page.render,
+}
+
+ALL_PAGES = {**PAGES, **SETTINGS_PAGES}
+
 
 @st.cache_resource(show_spinner=False)
 def get_agent() -> PulseMindAgent:
-    """Create the single agent for this process and try to bring up memory."""
-    agent = PulseMindAgent(get_settings())
-    try:
-        agent.reload_data()
-        agent.data_error = None
-    except Exception as exc:  # noqa: BLE001 - the UI explains how to generate the data
-        agent.data_error = str(exc)
+    """Create the single agent for this process and try to bring memory up.
 
+    Failures are recorded on the agent and surfaced as plain-language notices by the
+    pages that need them — never as a traceback, and never with endpoints, model names,
+    bank ids or ports.
+    """
+    agent = PulseMindAgent(get_settings())
     if agent.llm.configured:
         try:
             agent.memory.start()
             agent.memory_error = None
         except Exception as exc:  # noqa: BLE001 - keep the app usable without memory
-            agent.memory_error = str(exc)
+            agent.memory_error = type(exc).__name__
+            logger.exception("Memory service could not be started")
     else:
-        agent.memory_error = "GROQ_API_KEY is not set, so Hindsight cannot start."
+        agent.memory_error = "not_configured"
     return agent
 
 
-def _sidebar_brand() -> None:
-    st.markdown(
-        '<div class="pm-brand">'
-        '<div class="pm-brand-mark">🧠</div>'
-        "<div>"
-        '<div class="pm-brand-name">PulseMind</div>'
-        '<div class="pm-brand-tag">Memory-driven product intelligence</div>'
-        "</div>"
-        "</div>",
-        unsafe_allow_html=True,
-    )
+def _sidebar(agent: PulseMindAgent) -> None:
+    """Brand, navigation and Settings — no status dumps, no configuration details."""
+    with st.sidebar:
+        ui.brand()
+        ui.nav_label("Navigate")
+        ui.sidebar_nav(list(PAGES.keys()))
+        with st.container(key="pm_sidebar_bottom"):
+            ui.connection_status(agent)
+            ui.sidebar_bottom(list(SETTINGS_PAGES.keys()))
+
+
+def _load_data(agent: PulseMindAgent) -> str | None:
+    """Load the datasets, returning a log reference when they cannot be read."""
+    try:
+        agent.reload_data()
+        agent.data_error = None
+    except Exception as exc:  # noqa: BLE001 - the page renders a friendly failure
+        reference = ui.log_exception("Load feedback data", exc)
+        agent.data_error = reference
+        return reference
+    return None
 
 
 def main() -> None:
@@ -80,79 +107,42 @@ def main() -> None:
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    ui.apply_theme()
+    ui.apply_theme(user_state.theme_mode())
 
-    settings = get_settings()
-    problems = settings.missing_requirements()
+    if ui.PAGE_KEY not in st.session_state:
+        st.session_state[ui.PAGE_KEY] = ui.DEFAULT_PAGE
 
-    with st.sidebar:
-        _sidebar_brand()
-        st.markdown('<div class="pm-nav-label">Navigate</div>', unsafe_allow_html=True)
-        page = st.radio("Navigate", list(PAGES.keys()), label_visibility="collapsed")
+    with st.spinner("Starting PulseMind…"):
+        agent = get_agent()
 
-        st.divider()
+    _sidebar(agent)
 
-        with st.spinner("Starting PulseMind (Hindsight + Groq)…"):
-            agent = get_agent()
+    page = ui.current_page()
+    if page not in ALL_PAGES:
+        page = ui.DEFAULT_PAGE
 
-        st.markdown('<div class="pm-nav-label">System status</div>', unsafe_allow_html=True)
-        if problems:
-            st.error("Configuration incomplete")
-            for problem in problems:
-                st.caption(f"• {problem}")
-        else:
-            memory = agent.memory.status()
-            if agent.memory.is_started:
-                ui.badge_row([ui.badge(f"Hindsight {memory['mode']} · running", "success")])
-            else:
-                ui.badge_row([ui.badge("Hindsight not running", "warning")])
-            st.caption(f"endpoint: {memory['endpoint'] or '—'}")
-            st.caption(f"bank: `{memory['bank_id']}`")
-            st.caption(f"memory LLM ({memory['llm_provider']}): `{memory['llm_model']}`")
-            st.caption(f"reasoning LLM: `{memory.get('reasoning_model', agent.llm.model)}`")
-            st.caption(
-                "Separate models on purpose — Groq rate limits are per model, so memory "
-                "extraction gets its own tokens-per-minute budget."
-            )
-            if getattr(agent, "memory_error", None):
-                st.warning("Memory not available")
-                st.caption(getattr(agent, "memory_error"))
+    if page in SETTINGS_PAGES:
+        ALL_PAGES[page](agent)
+        return
 
-        if getattr(agent, "data_error", None):
-            st.error("Dataset missing")
-            st.caption(getattr(agent, "data_error"))
-
-        st.divider()
-        st.markdown('<div class="pm-nav-label">This session</div>', unsafe_allow_html=True)
-        st.caption(
-            f"Groq calls: **{agent.llm.usage.calls}** "
-            f"({agent.llm.usage.total_tokens:,} tokens)"
-        )
-        if agent.llm.usage.failures:
-            st.caption(f"Groq failures: {agent.llm.usage.failures}")
-        if agent.memory.is_started:
-            try:
-                overview = agent.memory_overview()
-                st.caption(f"Memory units in bank: **{overview['total']}**")
-            except Exception:  # noqa: BLE001 - sidebar must never break the app
-                pass
-        st.caption(
-            "Free tier: Groq + embedded Hindsight. "
-            "No paid APIs, no cloud infrastructure, no paid vector database."
-        )
-
-    if getattr(agent, "data_error", None):
+    reference = _load_data(agent)
+    if reference:
         ui.page_header("PulseMind", "The feedback dataset could not be loaded.")
-        st.error(
-            "The feedback dataset could not be loaded.\n\n"
-            "Generate the demo dataset with:\n\n"
-            "```bash\npython data/prepare_dataset.py demo\n```\n\n"
-            "or import the real Kaggle dataset with:\n\n"
-            "```bash\npython data/prepare_dataset.py kaggle --raw data/raw\n```"
+        ui.error_state(
+            section="Load feedback data",
+            title="We couldn't load the feedback data",
+            body="The demo dataset is missing or unreadable. Regenerate it with "
+            "`python data/prepare_dataset.py demo`, then try again.",
+            reference=reference,
+            retry_key="retry_dataset",
         )
         return
 
-    PAGES[page](agent)
+    try:
+        ALL_PAGES[page](agent)
+    except Exception as exc:  # noqa: BLE001 - the last net before Streamlit's own handler
+        ui.page_header(page, "Something went wrong while rendering this page.")
+        ui.error_state(exc, section=page, retry_key=f"retry_page_{page.lower().replace(' ', '_')}")
 
 
 if __name__ == "__main__":

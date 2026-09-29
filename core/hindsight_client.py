@@ -322,6 +322,26 @@ class HindsightMemory:
             finally:
                 self._server = None
 
+    def check_connection(self) -> bool:
+        """One real, read-only round-trip that answers "can we reach memory right now?".
+
+        `is_started` only reports that a client object exists, and `list_memories`
+        deliberately swallows read errors (it returns an empty list so the UI keeps
+        working), so neither can distinguish "nothing stored" from "backend
+        unreachable". Without an explicit probe the UI would be claiming a check it
+        never performed, so this performs one: `get_version` is the cheapest
+        side-effect-free call the client exposes.
+        """
+        if self._client is None:
+            return False
+        try:
+            self._call(self._client.get_version)
+        except Exception as exc:  # noqa: BLE001 - the caller renders the outcome
+            self.last_error = str(exc)
+            logger.warning("memory connection check failed: %s", exc)
+            return False
+        return True
+
     def status(self) -> dict[str, Any]:
         return {
             "mode": "embedded" if self.settings.is_embedded else "remote",

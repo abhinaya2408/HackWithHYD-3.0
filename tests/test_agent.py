@@ -58,6 +58,10 @@ class FakeMemory:
     def close(self) -> None:
         self.is_started = False
 
+    def check_connection(self) -> bool:
+        """Mirror the real client's reachability probe."""
+        return self.is_started
+
     @property
     def bank_id(self) -> str:
         return self.settings.bank_id
