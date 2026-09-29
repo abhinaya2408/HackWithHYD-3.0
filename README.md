@@ -1,100 +1,130 @@
-# PulseMind 
+# PulseMind
 
 ### Memory-Driven Product Intelligence Agent
 
-**PulseMind helps product teams understand what customers are saying, remember what they have already tried, evaluate outcomes, and identify what they should investigate next.**
+**PulseMind helps product teams understand what customers are saying,
+remember what they have already tried, evaluate outcomes, and identify
+what they should investigate next.**
 
-Instead of treating every customer feedback report as an isolated event, PulseMind connects feedback across time with product changes, observed outcomes, and previous decisions using persistent memory powered by Hindsight.
+Instead of treating every customer feedback report as an isolated event,
+PulseMind connects feedback across time with product changes, observed
+outcomes, and previous decisions using persistent memory powered by
+Hindsight.
 
-> **Core idea:** Feedback → Product Change → Outcome → Learning → Next Action
+> **Core idea:** Feedback → Product Change → Outcome → Learning → Next
+> Action
 
----
+------------------------------------------------------------------------
 
-##  Table of Contents
+## Table of Contents
 
-* [Overview](#-overview)
-* [Problem Statement](#-problem-statement)
-* [Our Solution](#-our-solution)
-* [Key Features](#-key-features)
-* [How PulseMind Works](#-how-pulsemind-works)
-* [System Architecture](#-system-architecture)
-* [Technology Stack](#-technology-stack)
-* [How Hindsight Is Used](#-how-hindsight-is-used)
-* [Role of Groq](#-role-of-groq)
-* [Reference and Inspiration](#-reference-and-inspiration)
-* [Installation and Setup](#-installation-and-setup)
-* [Environment Configuration](#-environment-configuration)
-* [Running PulseMind](#-running-pulsemind)
-* [Demo Scenario](#-demo-scenario)
-* [Data and Evaluation](#-data-and-evaluation)
-* [Limitations](#-limitations)
-* [Future Improvements](#-future-improvements)
-* [Project Structure](#-project-structure)
-* [Contributing](#-contributing)
-* [Acknowledgements](#-acknowledgements)
+-   [Overview](#-overview)
+-   [Problem Statement](#-problem-statement)
+-   [Our Solution](#-our-solution)
+-   [Key Features](#-key-features)
+-   [How PulseMind Works](#-how-pulsemind-works)
+-   [System Architecture](#-system-architecture)
+-   [Technology Stack](#-technology-stack)
+-   [How Hindsight Is Used](#-how-hindsight-is-used)
+-   [Role of Groq](#-role-of-groq)
+-   [Reference and Inspiration](#-reference-and-inspiration)
+-   [Installation and Setup](#-installation-and-setup)
+-   [Environment Configuration](#-environment-configuration)
+-   [Running PulseMind](#-running-pulsemind)
+-   [Demo Scenario](#-demo-scenario)
+-   [Data and Evaluation](#-data-and-evaluation)
+-   [Limitations](#-limitations)
+-   [Future Improvements](#-future-improvements)
+-   [Project Structure](#-project-structure)
+-   [Contributing](#-contributing)
+-   [Acknowledgements](#-acknowledgements)
 
----
+------------------------------------------------------------------------
 
-##  Overview
+## Overview
 
-Product teams receive feedback through reviews, surveys, support conversations, and other customer interactions. The challenge is not just understanding individual complaints. It is remembering historical problems, connecting them with previous product changes, and understanding whether those changes improved the customer experience.
+Product teams receive feedback through reviews, surveys, support
+conversations, and other customer interactions. The challenge is not
+just understanding individual complaints. It is remembering historical
+problems, connecting them with previous product changes, and
+understanding whether those changes improved the customer experience.
 
-PulseMind is an AI-powered product intelligence application designed to help product managers move from reactive feedback analysis to memory-driven decision support.
+PulseMind is an AI-powered product intelligence application designed to
+help product managers move from reactive feedback analysis to
+memory-driven decision support.
 
-It combines persistent memory, language-model reasoning, and deterministic data analysis to build historical context around customer feedback.
+It combines persistent memory, language-model reasoning, and
+deterministic data analysis to build historical context around customer
+feedback.
 
 ### What makes PulseMind different?
 
-A conventional feedback dashboard may tell a product manager that customers are complaining about checkout.
+A conventional feedback dashboard may tell a product manager that
+customers are complaining about checkout.
 
 PulseMind aims to answer deeper questions:
 
-* Have customers complained about this before?
-* What did the team change to address it?
-* What happened after that change?
-* Are the original complaints decreasing?
-* Is another problem emerging?
-* What should the product team investigate next?
+-   Have customers complained about this before?
+-   What did the team change to address it?
+-   What happened after that change?
+-   Are the original complaints decreasing?
+-   Is another problem emerging?
+-   What should the product team investigate next?
 
-The goal is to make historical context useful during current product decisions.
+The goal is to make historical context useful during current product
+decisions.
 
----
+------------------------------------------------------------------------
 
-##  Problem Statement
+## Problem Statement
 
-Product teams often struggle with disconnected customer feedback and product decisions.
+Product teams often struggle with disconnected customer feedback and
+product decisions.
 
 Common challenges include:
 
-* **Fragmented feedback:** Customer opinions are spread across different records and time periods.
-* **Repeated investigations:** Teams may revisit problems without remembering earlier findings.
-* **Missing historical context:** Current complaints are often analysed without considering previous product changes.
-* **Unclear outcomes:** Teams may record a feature release without systematically comparing subsequent feedback.
-* **Delayed issue detection:** A new complaint category may grow while attention remains focused on an older problem.
-* **Lost organisational knowledge:** Important lessons can disappear between meetings, releases, and product decisions.
+-   **Fragmented feedback:** Customer opinions are spread across
+    different records and time periods.
+-   **Repeated investigations:** Teams may revisit problems without
+    remembering earlier findings.
+-   **Missing historical context:** Current complaints are often
+    analysed without considering previous product changes.
+-   **Unclear outcomes:** Teams may record a feature release without
+    systematically comparing subsequent feedback.
+-   **Delayed issue detection:** A new complaint category may grow while
+    attention remains focused on an older problem.
+-   **Lost organisational knowledge:** Important lessons can disappear
+    between meetings, releases, and product decisions.
 
-Traditional dashboards are useful for measuring what is happening now, but historical reasoning requires connecting events over time.
+Traditional dashboards are useful for measuring what is happening now,
+but historical reasoning requires connecting events over time.
 
----
+------------------------------------------------------------------------
 
-##  Our Solution
+## Our Solution
 
-PulseMind introduces a memory-driven AI agent that connects customer feedback, product changes, outcomes, and product-team decisions.
+PulseMind introduces a memory-driven AI agent that connects customer
+feedback, product changes, outcomes, and product-team decisions.
 
 The application combines:
 
-1. **Feedback analysis** to organise customer comments and ratings.
-2. **Historical memory** to retain and retrieve relevant information using Hindsight.
-3. **AI reasoning** using Groq-powered language models.
-4. **Deterministic analytics** to calculate counts, percentages, and trends from available data.
-5. **Evidence-based insights** to connect historical context with current problems.
-6. **Decision support** to help product managers identify the next investigation.
+1.  **Feedback analysis** to organise customer comments and ratings.
+2.  **Historical memory** to retain and retrieve relevant information
+    using Hindsight.
+3.  **AI reasoning** using Groq-powered language models.
+4.  **Deterministic analytics** to calculate counts, percentages, and
+    trends from available data.
+5.  **Evidence-based insights** to connect historical context with
+    current problems.
+6.  **Decision support** to help product managers identify the next
+    investigation.
 
-PulseMind is designed to accumulate useful context across interactions instead of answering every question from the current dataset alone.
+PulseMind is designed to accumulate useful context across interactions
+instead of answering every question from the current dataset alone.
 
----
+------------------------------------------------------------------------
 
-##  Key Features
+## Key Features
 
 ### 1. Executive Dashboard
 
@@ -102,14 +132,15 @@ Provides an overview of available feedback and product activity.
 
 Depending on the available dataset, the dashboard can display:
 
-* Total feedback records.
-* Customer rating distributions.
-* Feedback sentiment and complaint categories.
-* Changes in feedback volume over time.
-* Recent product changes.
-* Emerging themes and relevant insights.
+-   Total feedback records.
+-   Customer rating distributions.
+-   Feedback sentiment and complaint categories.
+-   Changes in feedback volume over time.
+-   Recent product changes.
+-   Emerging themes and relevant insights.
 
-All displayed metrics should be calculated from the loaded data rather than invented by the language model.
+All displayed metrics should be calculated from the loaded data rather
+than invented by the language model.
 
 ### 2. Feedback Explorer
 
@@ -117,11 +148,12 @@ Allows product teams to explore individual feedback records.
 
 Capabilities include:
 
-* Browsing customer feedback.
-* Reviewing feedback text, ratings, and dates.
-* Filtering records using available categories and other supported fields.
-* Investigating recurring customer complaints.
-* Identifying records relevant to a product change.
+-   Browsing customer feedback.
+-   Reviewing feedback text, ratings, and dates.
+-   Filtering records using available categories and other supported
+    fields.
+-   Investigating recurring customer complaints.
+-   Identifying records relevant to a product change.
 
 ### 3. Product Changes
 
@@ -129,36 +161,44 @@ Provides a place to record product changes and their intended purpose.
 
 Product managers can document information such as:
 
-* Product change name.
-* Description of the change.
-* Release or change date.
-* Customer problem being addressed.
-* Expected outcome.
-* Observed outcome when measurements become available.
+-   Product change name.
+-   Description of the change.
+-   Release or change date.
+-   Customer problem being addressed.
+-   Expected outcome.
+-   Observed outcome when measurements become available.
 
-PulseMind must distinguish a recorded change from a verified improvement. A change should not be described as successful without supporting evidence.
+PulseMind must distinguish a recorded change from a verified
+improvement. A change should not be described as successful without
+supporting evidence.
 
 ### 4. Insights and Emerging Themes
 
-Helps product teams investigate patterns across feedback and historical context.
+Helps product teams investigate patterns across feedback and historical
+context.
 
 Potential insights include:
 
-* Recurring complaint categories.
-* Changes in ratings or complaint volume.
-* Problems that persist after a product change.
-* New issues that deserve investigation.
-* Historical product changes related to current complaints.
+-   Recurring complaint categories.
+-   Changes in ratings or complaint volume.
+-   Problems that persist after a product change.
+-   New issues that deserve investigation.
+-   Historical product changes related to current complaints.
 
-Recommendations are intended to be grounded in available feedback, calculated trends, and retrieved memories.
+Recommendations are intended to be grounded in available feedback,
+calculated trends, and retrieved memories.
 
 ### 5. Hindsight Memory Explorer
 
 Makes the application's persistent memory visible.
 
-Users can inspect relevant memories retrieved from Hindsight, where supported, and understand how historical information contributes to an answer.
+Users can inspect relevant memories retrieved from Hindsight, where
+supported, and understand how historical information contributes to an
+answer.
 
-This is a core component of PulseMind because the application is designed to retain useful information and reuse it in later interactions.
+This is a core component of PulseMind because the application is
+designed to retain useful information and reuse it in later
+interactions.
 
 ### 6. Ask PulseMind
 
@@ -166,107 +206,132 @@ Allows product managers to ask questions in natural language.
 
 Example questions:
 
-* What have we learned from customer feedback so far?
-* Did the latest checkout change improve the experience?
-* Which complaint needs further investigation?
-* What product changes were made to address checkout problems?
-* What happened after the previous change?
-* What should we investigate next?
+-   What have we learned from customer feedback so far?
+-   Did the latest checkout change improve the experience?
+-   Which complaint needs further investigation?
+-   What product changes were made to address checkout problems?
+-   What happened after the previous change?
+-   What should we investigate next?
 
-When historical context is available, PulseMind can retrieve relevant Hindsight memories and use them to inform its response.
+When historical context is available, PulseMind can retrieve relevant
+Hindsight memories and use them to inform its response.
 
----
+------------------------------------------------------------------------
 
-##  How PulseMind Works
+## How PulseMind Works
 
 The intended workflow follows a continuous product-learning cycle.
 
-**Step 1 — Collect**
+**Step 1 --- Collect**
 
-Load customer feedback from the available demo dataset or a supported imported dataset.
+Load customer feedback from the available demo dataset or a supported
+imported dataset.
 
-**Step 2 — Analyse**
+**Step 2 --- Analyse**
 
-Use Python to calculate measurable statistics and organise feedback. Use language-model reasoning where semantic interpretation is needed.
+Use Python to calculate measurable statistics and organise feedback. Use
+language-model reasoning where semantic interpretation is needed.
 
-**Step 3 — Remember**
+**Step 3 --- Remember**
 
-Retain relevant information in Hindsight, including feedback-related facts, product changes, and outcomes supported by the application.
+Retain relevant information in Hindsight, including feedback-related
+facts, product changes, and outcomes supported by the application.
 
-**Step 4 — Recall**
+**Step 4 --- Recall**
 
-When a new question arrives, retrieve relevant historical memories from Hindsight.
+When a new question arrives, retrieve relevant historical memories from
+Hindsight.
 
-**Step 5 — Connect**
+**Step 5 --- Connect**
 
 Combine retrieved context with current feedback and calculated trends.
 
-**Step 6 — Recommend**
+**Step 6 --- Recommend**
 
-Generate a recommendation or identify an investigation that is supported by the available evidence.
+Generate a recommendation or identify an investigation that is supported
+by the available evidence.
 
-**Step 7 — Learn from outcomes**
+**Step 7 --- Learn from outcomes**
 
-When a product change and its subsequent outcome are recorded, retain the relevant information so it can inform future analysis.
+When a product change and its subsequent outcome are recorded, retain
+the relevant information so it can inform future analysis.
 
-The long-term goal is to create a feedback loop in which each interaction contributes useful context to subsequent product decisions.
+The long-term goal is to create a feedback loop in which each
+interaction contributes useful context to subsequent product decisions.
 
----
+------------------------------------------------------------------------
 
-##  System Architecture
+## System Architecture
+
+The following diagram shows how PulseMind's user interface, Python orchestration, feedback analysis, Hindsight memory, and Groq-powered reasoning work together. The diagram describes the intended workflow; verify that each component and connection matches the current implementation.
 
 ```mermaid
 flowchart TD
-    A[Customer Feedback Dataset] --> B[PulseMind Streamlit UI]
-    B --> C[Python Agent Orchestrator]
+    A["Customer Feedback Dataset"] --> B["Streamlit User Interface"]
+    B --> C["Python Agent Orchestrator"]
 
-    C --> D[Feedback Analysis]
-    C --> E[Hindsight Memory Layer]
-    C --> F[Groq LLM Client]
+    C --> D["Feedback Analysis"]
+    C --> E["Hindsight Memory Layer"]
+    C --> F["Groq LLM Client"]
 
-    D --> G[Counts, Ratings and Trends]
-    E --> H[Retain and Recall Memories]
-    F --> I[Semantic Analysis and Reasoning]
+    D --> G["Counts, Ratings and Trends"]
+    E --> H["Retain and Recall Memories"]
+    F --> I["Semantic Analysis and Reasoning"]
 
-    G --> J[Evidence-Based Insight Engine]
+    G --> J["Evidence-Based Insight Engine"]
     H --> J
     I --> J
 
-    J --> K[Product Recommendations]
-    K --> L[Product Manager Review]
+    J --> K["Product Recommendations"]
+    K --> L["Product Manager Review"]
 
-    L --> M[Recorded Decision or Outcome]
+    L --> M["Recorded Decision or Outcome"]
     M --> E
 ```
 
-### Architecture responsibilities
+### Architecture Components
 
-| Component      | Responsibility                                           |
-| -------------- | -------------------------------------------------------- |
-| Streamlit      | User interface and interaction                           |
-| Python         | Application orchestration and deterministic calculations |
-| Hindsight      | Persistent memory retention and retrieval                |
-| Groq           | Language-model reasoning and analysis                    |
-| CSV datasets   | Demo feedback and recorded product-change data           |
-| Insight engine | Combines relevant evidence into product insights         |
+| Component | Responsibility |
+|---|---|
+| Streamlit User Interface | Displays the dashboard, feedback explorer, product changes, memory explorer, and Ask PulseMind interface. |
+| Python Agent Orchestrator | Coordinates feedback analysis, memory retrieval, AI reasoning, and recommendation generation. |
+| Feedback Analysis | Uses Python and Pandas, where implemented, to calculate counts, ratings, complaint percentages, and trends. |
+| Hindsight Memory Layer | Retains and retrieves historical feedback, recorded product changes, outcomes, and decisions for future queries. |
+| Groq LLM Client | Supports natural-language understanding, semantic feedback analysis, historical-context interpretation, and recommendations. |
+| Evidence-Based Insight Engine | Combines calculated metrics, current feedback, and retrieved memories to generate evidence-based insights. |
+| Product Manager Review | Allows the product manager to review recommendations and record relevant decisions or outcomes. |
 
-The diagram represents the intended workflow. Actual integrations and operations must be verified against the implementation.
+### Data Flow
+
+1. Customer feedback is loaded into PulseMind.
+2. The Streamlit interface sends the requested operation to the Python orchestration layer.
+3. Feedback analysis calculates measurable statistics, while Groq supports semantic interpretation and reasoning.
+4. Hindsight retrieves relevant historical memories and can retain new information through the implemented memory workflow.
+5. The insight engine combines the available metrics, current feedback, and retrieved context.
+6. PulseMind presents recommendations for the product manager to review.
+7. Relevant decisions or outcomes can be retained in Hindsight so future queries can use that context.
+
+**Key design principle:** Hindsight provides persistent memory, Groq provides language-model reasoning, and Python handles application orchestration and measurable calculations. A recorded product change alone does not prove that the change caused an observed outcome.
 
 ---
 
-##  How Hindsight Is Used
+## How Hindsight Is Used
 
 Repository: https://github.com/vectorize-io/hindsight
 
 Hindsight is the central memory component of PulseMind.
 
-A conventional language-model interaction may have access only to the current prompt and supplied context. PulseMind uses Hindsight to preserve and retrieve relevant information across interactions.
+A conventional language-model interaction may have access only to the
+current prompt and supplied context. PulseMind uses Hindsight to
+preserve and retrieve relevant information across interactions.
 
 ### Memory lifecycle
 
 **1. Retain**
 
-Store relevant information from the application's supported workflow, such as customer feedback, recorded product changes, and observed outcomes.
+Store relevant information from the application's supported workflow,
+such as customer feedback, recorded product changes, and observed
+outcomes.
 
 **2. Recall**
 
@@ -274,133 +339,161 @@ Retrieve memories relevant to a new question or investigation.
 
 **3. Reason with historical context**
 
-Combine retrieved memories with current feedback and deterministic analytics.
+Combine retrieved memories with current feedback and deterministic
+analytics.
 
 **4. Retain new learning**
 
-Where the corresponding workflow is implemented, record subsequent outcomes or decisions so that future questions can use that context.
+Where the corresponding workflow is implemented, record subsequent
+outcomes or decisions so that future questions can use that context.
 
 ### Why persistent memory matters
 
 Consider two questions:
 
-* Without historical context: "What are customers complaining about today?"
-* With historical context: "What are customers complaining about today, what did we previously change, and what happened afterward?"
+-   Without historical context: "What are customers complaining about
+    today?"
+-   With historical context: "What are customers complaining about
+    today, what did we previously change, and what happened afterward?"
 
-The second question requires more than a summary of current feedback. It requires connecting events and retrieving information from earlier interactions.
+The second question requires more than a summary of current feedback. It
+requires connecting events and retrieving information from earlier
+interactions.
 
 That is the role of Hindsight in PulseMind.
 
----
+------------------------------------------------------------------------
 
-##  Role of Groq
+## Role of Groq
 
-Groq provides access to language models used for AI-powered analysis and reasoning.
+Groq provides access to language models used for AI-powered analysis and
+reasoning.
 
 In PulseMind, the language model can support tasks such as:
 
-* Interpreting natural-language questions.
-* Analysing the meaning of customer comments.
-* Summarising retrieved historical context.
-* Connecting relevant memories with current feedback.
-* Producing evidence-based recommendations.
+-   Interpreting natural-language questions.
+-   Analysing the meaning of customer comments.
+-   Summarising retrieved historical context.
+-   Connecting relevant memories with current feedback.
+-   Producing evidence-based recommendations.
 
-Exact statistics, counts, percentages, and other measurable values should be calculated by Python from the available data.
+Exact statistics, counts, percentages, and other measurable values
+should be calculated by Python from the available data.
 
-This separation helps reduce incorrect calculations and makes results easier to verify.
+This separation helps reduce incorrect calculations and makes results
+easier to verify.
 
 ### Configuration
 
-PulseMind reads its configuration from environment variables. The actual model names are configurable and should match the installed application.
+PulseMind reads its configuration from environment variables. The actual
+model names are configurable and should match the installed application.
 
----
+------------------------------------------------------------------------
 
-##  Reference and Inspiration
+## Reference and Inspiration
 
 ### Self-Driving Agents
 
-Reference repository: https://github.com/vectorize-io/self-driving-agents
+Reference repository:
+https://github.com/vectorize-io/self-driving-agents
 
-PulseMind takes inspiration from the broader idea of specialised AI agents that work toward defined responsibilities and use context to support their tasks.
+PulseMind takes inspiration from the broader idea of specialised AI
+agents that work toward defined responsibilities and use context to
+support their tasks.
 
-The reference is used for inspiration around agent-oriented workflows and practical AI applications.
+The reference is used for inspiration around agent-oriented workflows
+and practical AI applications.
 
-**Important distinction:** The self-driving-agents repository is a reference, not a runtime dependency of PulseMind. PulseMind's core implementation is based on its own Python workflow, Hindsight memory integration, Groq-powered reasoning, and Streamlit interface.
+**Important distinction:** The self-driving-agents repository is a
+reference, not a runtime dependency of PulseMind. PulseMind's core
+implementation is based on its own Python workflow, Hindsight memory
+integration, Groq-powered reasoning, and Streamlit interface.
 
-PulseMind focuses specifically on one problem: helping product teams connect customer feedback with historical product changes and outcomes.
+PulseMind focuses specifically on one problem: helping product teams
+connect customer feedback with historical product changes and outcomes.
 
----
+------------------------------------------------------------------------
 
-##  Technology Stack
+## Technology Stack
 
-| Technology     | Purpose                                   |
-| -------------- | ----------------------------------------- |
-| Python         | Application logic and orchestration       |
-| Streamlit      | Interactive application interface         |
-| Hindsight      | Persistent AI memory                      |
-| Groq API       | Language-model reasoning                  |
-| Pandas         | Tabular feedback processing, where used   |
-| CSV            | Demo feedback and product-change datasets |
-| Git and GitHub | Version control and source-code hosting   |
+  Technology       Purpose
+  ---------------- -------------------------------------------
+  Python           Application logic and orchestration
+  Streamlit        Interactive application interface
+  Hindsight        Persistent AI memory
+  Groq API         Language-model reasoning
+  Pandas           Tabular feedback processing, where used
+  CSV              Demo feedback and product-change datasets
+  Git and GitHub   Version control and source-code hosting
 
-The exact dependencies are defined in `requirements.txt`. Refer to that file for the definitive list of packages used by the current implementation.
+The exact dependencies are defined in `requirements.txt`. Refer to that
+file for the definitive list of packages used by the current
+implementation.
 
----
+------------------------------------------------------------------------
 
-##  Installation and Setup
+## Installation and Setup
 
 ### Prerequisites
 
 Before running PulseMind, install:
 
-* Python compatible with the project's dependencies.
-* Git.
-* A Groq API key.
-* The dependencies listed in `requirements.txt`.
+-   Python compatible with the project's dependencies.
+-   Git.
+-   A Groq API key.
+-   The dependencies listed in `requirements.txt`.
 
-Hindsight must also be configured according to the project's selected embedded-server setup.
+Hindsight must also be configured according to the project's selected
+embedded-server setup.
 
 ### 1. Clone the repository
 
-Replace the placeholder below with your actual public GitHub repository URL.
+Clone the PulseMind repository using the following commands.
 
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd hackwithhyd
+``` bash
+git clone https://github.com/abhinaya2408/HackWithHYD-3.0.git
+cd HackWithHYD-3.0
 ```
 
-Alternatively, open the existing project directory if you have already downloaded or cloned it.
+If you have already downloaded or cloned the repository, open that
+project directory instead.
 
 ### 2. Create a virtual environment
 
 On Windows PowerShell:
 
-```powershell
+``` powershell
 python -m venv .venv
 ```
 
 Activate it:
 
-```powershell
+``` powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-If PowerShell blocks activation, follow your system's Python virtual-environment guidance rather than changing security settings unnecessarily.
+If PowerShell blocks activation, follow your system's Python
+virtual-environment guidance rather than changing security settings
+unnecessarily.
 
 ### 3. Install dependencies
 
-```powershell
+``` powershell
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-If Hindsight's embedded package is not included in the existing requirements, follow the installation instructions for the version used by the project. Avoid installing conflicting package versions without checking compatibility.
+If Hindsight's embedded package is not included in the existing
+requirements, follow the installation instructions for the version used
+by the project. Avoid installing conflicting package versions without
+checking compatibility.
 
 ### 4. Configure environment variables
 
-Create a local `.env` file from `.env.example`, if the example file exists.
+Create a local `.env` file from `.env.example`, if the example file
+exists.
 
-```powershell
+``` powershell
 Copy-Item .env.example .env
 ```
 
@@ -412,21 +505,23 @@ Do not upload `.env` to GitHub.
 
 From the project root, run:
 
-```powershell
+``` powershell
 streamlit run app.py
 ```
 
-If the current project documents a different startup command, use that command instead.
+If the current project documents a different startup command, use that
+command instead.
 
 Open the local URL printed by Streamlit in your browser.
 
----
+------------------------------------------------------------------------
 
-##  Environment Configuration
+## Environment Configuration
 
-An example configuration is shown below. Keep only the variables actually supported by your application's configuration code.
+An example configuration is shown below. Keep only the variables
+actually supported by your application's configuration code.
 
-```dotenv
+``` dotenv
 GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=openai/gpt-oss-120b
 
@@ -437,53 +532,70 @@ HINDSIGHT_LLM_PROVIDER=groq
 PULSEMIND_DATA_DIR=data
 ```
 
-Your actual project may also use separate settings for Hindsight's memory model, reasoning model, server URL, or authentication.
+Your actual project may also use separate settings for Hindsight's
+memory model, reasoning model, server URL, or authentication.
 
-Use the variable names and model identifiers expected by the existing implementation. Never put real API keys in this README, screenshots, source code, or version control.
+Use the variable names and model identifiers expected by the existing
+implementation. Never put real API keys in this README, screenshots,
+source code, or version control.
 
-Groq access and rate limits depend on the account and selected model. Check the provider's current documentation for availability and limits.
+Groq access and rate limits depend on the account and selected model.
+Check the provider's current documentation for availability and limits.
 
----
+------------------------------------------------------------------------
 
-##  Demo Scenario
+## Demo Scenario
 
-PulseMind can be demonstrated through a prepared, time-based product-feedback scenario.
+PulseMind can be demonstrated through a prepared, time-based
+product-feedback scenario.
 
-### Stage 1 — Identify the initial problem
+### Stage 1 --- Identify the initial problem
 
 Customers report friction during checkout.
 
-PulseMind analyses the available feedback and identifies checkout as a problem area.
+PulseMind analyses the available feedback and identifies checkout as a
+problem area.
 
-### Stage 2 — Record a product change
+### Stage 2 --- Record a product change
 
-The product manager records a checkout improvement and its expected outcome.
+The product manager records a checkout improvement and its expected
+outcome.
 
-The change date and description come from the recorded product-change data.
+The change date and description come from the recorded product-change
+data.
 
-### Stage 3 — Evaluate subsequent feedback
+### Stage 3 --- Evaluate subsequent feedback
 
-Later feedback is analysed to determine whether checkout-related complaints changed and whether other complaint categories emerged.
+Later feedback is analysed to determine whether checkout-related
+complaints changed and whether other complaint categories emerged.
 
-Any reported improvement must be calculated from actual records in the selected dataset.
+Any reported improvement must be calculated from actual records in the
+selected dataset.
 
-### Stage 4 — Recall historical context
+### Stage 4 --- Recall historical context
 
-The product manager asks PulseMind what happened after the previous change.
+The product manager asks PulseMind what happened after the previous
+change.
 
-PulseMind retrieves relevant Hindsight memories and uses the available outcome evidence to answer.
+PulseMind retrieves relevant Hindsight memories and uses the available
+outcome evidence to answer.
 
-### Stage 5 — Recommend the next investigation
+### Stage 5 --- Recommend the next investigation
 
-If the data shows that checkout complaints declined while another complaint category increased, PulseMind can identify that pattern and recommend investigating the new issue.
+If the data shows that checkout complaints declined while another
+complaint category increased, PulseMind can identify that pattern and
+recommend investigating the new issue.
 
-The recommendation should be presented as a proposed next step, not proof of causation.
+The recommendation should be presented as a proposed next step, not
+proof of causation.
 
-**Demo-data disclaimer:** Prepared demonstration records illustrate the workflow. They are not real customer findings unless the application has been populated with genuine, appropriately sourced customer data.
+**Demo-data disclaimer:** Prepared demonstration records illustrate the
+workflow. They are not real customer findings unless the application has
+been populated with genuine, appropriately sourced customer data.
 
----
+------------------------------------------------------------------------
 
-##  Data and Evaluation
+## Data and Evaluation
 
 PulseMind separates measurable analysis from AI interpretation.
 
@@ -491,77 +603,93 @@ PulseMind separates measurable analysis from AI interpretation.
 
 Python should calculate measurable results such as:
 
-* Number of feedback records.
-* Average ratings.
-* Category frequencies.
-* Period-over-period changes.
-* Complaint percentages.
-* Rating differences before and after a recorded change.
+-   Number of feedback records.
+-   Average ratings.
+-   Category frequencies.
+-   Period-over-period changes.
+-   Complaint percentages.
+-   Rating differences before and after a recorded change.
 
 ### AI-supported interpretation
 
-The language model can help interpret feedback, explain historical patterns, and formulate recommendations using retrieved memories and available evidence.
+The language model can help interpret feedback, explain historical
+patterns, and formulate recommendations using retrieved memories and
+available evidence.
 
 ### Evaluation checklist
 
 Before presenting a result as verified, check:
 
-* Are the dates and chronology correct?
-* Are the rating calculations correct?
-* Are the metrics calculated from the selected dataset?
-* Are the memories returned by the actual Hindsight service?
-* Does the answer cite or identify relevant supporting evidence?
-* Is the recommendation consistent with the evidence?
-* Are demo records clearly distinguished from real customer feedback?
-* Are failures reported rather than hidden by fabricated fallback responses?
+-   Are the dates and chronology correct?
+-   Are the rating calculations correct?
+-   Are the metrics calculated from the selected dataset?
+-   Are the memories returned by the actual Hindsight service?
+-   Does the answer cite or identify relevant supporting evidence?
+-   Is the recommendation consistent with the evidence?
+-   Are demo records clearly distinguished from real customer feedback?
+-   Are failures reported rather than hidden by fabricated fallback
+    responses?
 
-A before-memory versus after-memory comparison can help demonstrate the value of persistent memory, provided both outputs are generated through the intended workflows.
+A before-memory versus after-memory comparison can help demonstrate the
+value of persistent memory, provided both outputs are generated through
+the intended workflows.
 
----
+------------------------------------------------------------------------
 
-##  Limitations
+## Limitations
 
-PulseMind's conclusions depend on the quality, coverage, and accuracy of the available feedback and product-change records.
+PulseMind's conclusions depend on the quality, coverage, and accuracy of
+the available feedback and product-change records.
 
 Current limitations to communicate clearly include:
 
-* Prepared demo data does not establish real-world customer impact.
-* Recorded product changes do not independently prove that a change caused an outcome.
-* AI-generated interpretations can be incorrect and require evidence-based validation.
-* Missing historical records can limit memory retrieval and comparisons.
-* Groq availability and rate limits can affect AI-powered operations.
-* Persistent memory is only useful when relevant information is correctly retained and retrieved.
-* External integrations should not be assumed to exist unless they have been implemented and tested.
+-   Prepared demo data does not establish real-world customer impact.
+-   Recorded product changes do not independently prove that a change
+    caused an outcome.
+-   AI-generated interpretations can be incorrect and require
+    evidence-based validation.
+-   Missing historical records can limit memory retrieval and
+    comparisons.
+-   Groq availability and rate limits can affect AI-powered operations.
+-   Persistent memory is only useful when relevant information is
+    correctly retained and retrieved.
+-   External integrations should not be assumed to exist unless they
+    have been implemented and tested.
 
-The application should clearly distinguish observed facts, calculated measurements, retrieved historical information, and AI-generated recommendations.
+The application should clearly distinguish observed facts, calculated
+measurements, retrieved historical information, and AI-generated
+recommendations.
 
----
+------------------------------------------------------------------------
 
-##  Future Improvements
+## Future Improvements
 
 Potential future extensions include:
 
-* Integrating customer support platforms and feedback sources.
-* Connecting GitHub or project-management systems to retrieve verified product changes.
-* Supporting larger real-world feedback datasets.
-* Improving theme detection and historical trend analysis.
-* Adding more robust outcome evaluation.
-* Providing richer memory provenance and evidence inspection.
-* Evaluating recommendation quality with repeatable test datasets.
-* Adding authentication and deployment-ready configuration.
-* Monitoring model errors, latency, and memory retrieval quality.
+-   Integrating customer support platforms and feedback sources.
+-   Connecting GitHub or project-management systems to retrieve verified
+    product changes.
+-   Supporting larger real-world feedback datasets.
+-   Improving theme detection and historical trend analysis.
+-   Adding more robust outcome evaluation.
+-   Providing richer memory provenance and evidence inspection.
+-   Evaluating recommendation quality with repeatable test datasets.
+-   Adding authentication and deployment-ready configuration.
+-   Monitoring model errors, latency, and memory retrieval quality.
 
-These are future directions, not claims about functionality already implemented.
+These are future directions, not claims about functionality already
+implemented.
 
----
+------------------------------------------------------------------------
 
-##  Project Structure
+## Project Structure
 
-The project is organised around a Python application, a Streamlit interface, data files, and service modules.
+The project is organised around a Python application, a Streamlit
+interface, data files, and service modules.
 
 An example of the expected high-level structure is:
 
-```text
+``` text
 hackwithhyd/
 ├── app.py
 ├── requirements.txt
@@ -582,37 +710,48 @@ hackwithhyd/
 └── ui/
 ```
 
-The exact files may differ. Update this section to match the actual repository rather than creating placeholder files solely to match the diagram.
+The exact files may differ. Update this section to match the actual
+repository rather than creating placeholder files solely to match the
+diagram.
 
----
+------------------------------------------------------------------------
 
-##  Contributing
+## Contributing
 
 Contributions and suggestions are welcome.
 
-1. Fork the repository.
-2. Create a branch for your change.
-3. Implement the change and add appropriate tests.
-4. Run the relevant test suite.
-5. Submit a pull request describing the change and its impact.
+1.  Fork the repository.
+2.  Create a branch for your change.
+3.  Implement the change and add appropriate tests.
+4.  Run the relevant test suite.
+5.  Submit a pull request describing the change and its impact.
 
-Please avoid committing credentials, private customer information, or unverified claims about application functionality.
+Please avoid committing credentials, private customer information, or
+unverified claims about application functionality.
 
----
+------------------------------------------------------------------------
 
-##  Acknowledgements
+## Acknowledgements
 
-* **Hindsight:** https://github.com/vectorize-io/hindsight — persistent memory infrastructure for AI applications.
-* **Self-Driving Agents:** https://github.com/vectorize-io/self-driving-agents — reference and inspiration for agent-oriented workflows.
-* **Groq:** https://groq.com/ — language-model inference platform.
-* **Streamlit:** https://streamlit.io/ — Python application framework.
+-   **Hindsight:** https://github.com/vectorize-io/hindsight ---
+    persistent memory infrastructure for AI applications.
+-   **Self-Driving Agents:**
+    https://github.com/vectorize-io/self-driving-agents --- reference
+    and inspiration for agent-oriented workflows.
+-   **Groq:** https://groq.com/ --- language-model inference platform.
+-   **Streamlit:** https://streamlit.io/ --- Python application
+    framework.
 
----
+------------------------------------------------------------------------
 
-##  Final Note
+## Final Note
 
 PulseMind is built around a simple principle:
 
-**An AI product assistant should not only analyse what customers are saying now. It should use what the team has learned before to help decide what to investigate next.**
+**An AI product assistant should not only analyse what customers are
+saying now. It should use what the team has learned before to help
+decide what to investigate next.**
 
-By combining persistent memory, data-driven analysis, and language-model reasoning, PulseMind aims to make customer feedback more useful across the product development lifecycle.
+By combining persistent memory, data-driven analysis, and language-model
+reasoning, PulseMind aims to make customer feedback more useful across
+the product development lifecycle.
