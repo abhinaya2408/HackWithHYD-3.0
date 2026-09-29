@@ -1,0 +1,22 @@
+# PulseMind — free-tier MVP dependency set
+#
+# Memory layer (REQUIRED): Hindsight runs fully embedded, no Docker and no cloud.
+# `hindsight-all` bundles the Hindsight API server + Python client + embedded
+# PostgreSQL (pg0), so PulseMind boots its own memory backend in-process.
+hindsight-all==0.10.1
+
+# LLM provider (REQUIRED): Groq for feedback understanding + reasoning.
+groq==1.7.0
+
+# UI
+streamlit==1.64.0
+plotly==7.1.0
+
+# Data
+pandas==3.0.6
+
+# Config
+python-dotenv==1.2.3
+
+# Tests
+pytest==9.1.1

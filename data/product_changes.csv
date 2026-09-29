@@ -1,0 +1,2 @@
+change_id,date,change_name,product_area,problem_targeted,expected_outcome,source,github_repo,github_number,github_kind,github_version,github_url
+CHG-001,2026-02-15,Checkout V2,Checkout,"Checkout friction: multi-step flow, saved address and card being reset, confusing coupon and guest checkout",Reduce checkout-related complaints and cart abandonment,,,,,,

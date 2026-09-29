@@ -1,0 +1,216 @@
+feedback_id,date,customer_id,channel,product_area,feedback_text,rating,sentiment,theme
+FB-00001,2025-11-01,cust_6168,email,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,1,negative,delivery_delay
+FB-00002,2025-11-01,cust_5315,in_app_survey,App Performance,App freezes during checkout and I have to force close it.,2,negative,app_crash
+FB-00003,2025-11-02,cust_6881,call_center,Payments,My UPI transaction has been pending for three days and the order is not confirmed.,1,negative,payment_reliability
+FB-00004,2025-11-03,cust_4527,call_center,Payments,UPI payment failed but the money was debited from my account. Still not refunded.,2,negative,payment_reliability
+FB-00005,2025-11-04,cust_9279,in_app_survey,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,1,negative,checkout_friction
+FB-00006,2025-11-05,cust_5012,web,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00007,2025-11-05,cust_1106,web,Checkout,The coupon field at checkout is confusing and it emptied my basket when I applied it.,2,negative,checkout_friction
+FB-00008,2025-11-05,cust_6925,in_app_survey,Payments,Card declined twice and then UPI failed too. Could not complete the purchase.,2,negative,payment_reliability
+FB-00009,2025-11-05,cust_2169,in_app_survey,Delivery,"Promised next-day delivery, it turned up five days later.",2,negative,delivery_delay
+FB-00010,2025-11-05,cust_8787,in_app_survey,Delivery,Arrived a day early and the packaging was in perfect condition.,4,positive,delivery_delay
+FB-00011,2025-11-12,cust_9928,email,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,1,negative,checkout_friction
+FB-00012,2025-11-12,cust_9830,call_center,Search,Searching for an exact model number returns nothing useful.,1,negative,search_relevance
+FB-00013,2025-11-13,cust_3646,in_app_survey,Support,No reply to my email for five days now.,2,negative,support_response
+FB-00014,2025-11-15,cust_4598,call_center,Delivery,Delivery is four days late and the tracking page has not updated at all.,2,negative,delivery_delay
+FB-00015,2025-11-15,cust_6155,web,Search,"Search results show completely unrelated products, I cannot find what I need.",1,negative,search_relevance
+FB-00016,2025-11-15,cust_8517,web,Search,"Filters do not apply properly, search keeps returning out-of-stock items.",1,negative,search_relevance
+FB-00017,2025-11-15,cust_2876,in_app_survey,App Performance,The app crashes every time I open the orders tab.,3,negative,app_crash
+FB-00018,2025-11-16,cust_4733,call_center,Delivery,Delivery is four days late and the tracking page has not updated at all.,2,negative,delivery_delay
+FB-00019,2025-11-16,cust_2133,in_app_survey,Payments,"Saved card worked first try, payment confirmation came straight away.",5,positive,payment_reliability
+FB-00020,2025-11-17,cust_7912,mobile_app,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,1,negative,checkout_friction
+FB-00021,2025-11-17,cust_1771,mobile_app,Returns,Return pickup was rescheduled three times without informing me.,1,negative,return_process
+FB-00022,2025-11-18,cust_7227,call_center,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,1,negative,delivery_delay
+FB-00023,2025-11-18,cust_5889,in_app_survey,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,1,negative,support_response
+FB-00024,2025-11-22,cust_3677,email,Delivery,Tracking says delivered but nothing has reached me.,1,negative,delivery_delay
+FB-00025,2025-11-24,cust_4923,mobile_app,Support,Nobody could tell me why my payment failed. Just kept transferring me.,1,negative,support_response
+FB-00026,2025-11-25,cust_2827,call_center,App Performance,Latest update made the app extremely slow on my phone.,1,negative,app_crash
+FB-00027,2025-11-25,cust_9005,mobile_app,Support,The agent disconnected twice and I had to explain everything again.,3,negative,support_response
+FB-00028,2025-11-26,cust_3664,call_center,Delivery,Package arrived late and the outer box was crushed.,1,negative,delivery_delay
+FB-00029,2025-11-27,cust_6930,web,Search,Search returns the same sponsored items no matter what I type.,2,negative,search_relevance
+FB-00030,2025-11-28,cust_2040,email,Returns,Refund for my return is still pending after two weeks.,1,negative,return_process
+FB-00031,2025-11-29,cust_9785,mobile_app,Payments,"Payment keeps failing at the last step with a generic error, no useful message.",1,negative,payment_reliability
+FB-00032,2025-11-29,cust_9669,call_center,Returns,Return flow in the app is confusing and no return label was generated.,2,negative,return_process
+FB-00033,2025-11-29,cust_2290,mobile_app,Checkout,"Checkout V2 is so much faster, I was done in about thirty seconds.",4,positive,checkout_friction
+FB-00034,2025-12-01,cust_9883,mobile_app,Delivery,"Promised next-day delivery, it turned up five days later.",2,negative,delivery_delay
+FB-00035,2025-12-03,cust_5915,email,Returns,Refund for my return is still pending after two weeks.,2,negative,return_process
+FB-00036,2025-12-04,cust_1117,mobile_app,Checkout,The coupon field at checkout is confusing and it emptied my basket when I applied it.,3,negative,checkout_friction
+FB-00037,2025-12-04,cust_9288,call_center,App Performance,The app crashes every time I open the orders tab.,1,negative,app_crash
+FB-00038,2025-12-05,cust_4346,call_center,Returns,Return pickup was rescheduled three times without informing me.,3,negative,return_process
+FB-00039,2025-12-06,cust_1344,in_app_survey,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,2,negative,checkout_friction
+FB-00040,2025-12-07,cust_8651,mobile_app,Payments,Card declined twice and then UPI failed too. Could not complete the purchase.,2,negative,payment_reliability
+FB-00041,2025-12-07,cust_5345,email,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,1,negative,delivery_delay
+FB-00042,2025-12-08,cust_5092,mobile_app,Delivery,Package arrived late and the outer box was crushed.,2,negative,delivery_delay
+FB-00043,2025-12-09,cust_8397,mobile_app,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,2,negative,checkout_friction
+FB-00044,2025-12-09,cust_8350,web,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,2,negative,delivery_delay
+FB-00045,2025-12-09,cust_2312,web,Search,"Filters do not apply properly, search keeps returning out-of-stock items.",3,negative,search_relevance
+FB-00046,2025-12-10,cust_8811,in_app_survey,Search,"Search results show completely unrelated products, I cannot find what I need.",2,negative,search_relevance
+FB-00047,2025-12-10,cust_4450,call_center,Support,The agent disconnected twice and I had to explain everything again.,1,negative,support_response
+FB-00048,2025-12-11,cust_3143,call_center,Delivery,Arrived a day early and the packaging was in perfect condition.,5,positive,delivery_delay
+FB-00049,2025-12-12,cust_6559,mobile_app,Delivery,Delivery is four days late and the tracking page has not updated at all.,1,negative,delivery_delay
+FB-00050,2025-12-12,cust_8973,web,Delivery,Package arrived late and the outer box was crushed.,1,negative,delivery_delay
+FB-00051,2025-12-14,cust_7932,web,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00052,2025-12-14,cust_7570,mobile_app,Delivery,Delivery is four days late and the tracking page has not updated at all.,1,negative,delivery_delay
+FB-00053,2025-12-14,cust_9900,call_center,App Performance,App freezes during checkout and I have to force close it.,1,negative,app_crash
+FB-00054,2025-12-14,cust_5905,mobile_app,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,3,negative,support_response
+FB-00055,2025-12-14,cust_5533,mobile_app,Payments,"Saved card worked first try, payment confirmation came straight away.",5,positive,payment_reliability
+FB-00056,2025-12-15,cust_1514,call_center,Checkout,I lost my whole cart at the payment step. Had to start over from scratch.,1,negative,checkout_friction
+FB-00057,2025-12-15,cust_8744,web,Payments,My UPI transaction has been pending for three days and the order is not confirmed.,3,negative,payment_reliability
+FB-00058,2025-12-15,cust_2753,in_app_survey,Support,No reply to my email for five days now.,1,negative,support_response
+FB-00059,2025-12-16,cust_2343,email,Search,Search returns the same sponsored items no matter what I type.,2,negative,search_relevance
+FB-00060,2025-12-17,cust_1152,email,Returns,Return flow in the app is confusing and no return label was generated.,2,negative,return_process
+FB-00061,2025-12-17,cust_5002,call_center,App Performance,Latest update made the app extremely slow on my phone.,1,negative,app_crash
+FB-00062,2025-12-18,cust_1828,in_app_survey,Delivery,"Promised next-day delivery, it turned up five days later.",1,negative,delivery_delay
+FB-00063,2025-12-21,cust_6107,email,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,3,negative,checkout_friction
+FB-00064,2025-12-21,cust_2545,mobile_app,Payments,"Payment keeps failing at the last step with a generic error, no useful message.",1,negative,payment_reliability
+FB-00065,2025-12-22,cust_3724,email,Delivery,Tracking says delivered but nothing has reached me.,1,negative,delivery_delay
+FB-00066,2025-12-22,cust_7615,mobile_app,Search,Searching for an exact model number returns nothing useful.,1,negative,search_relevance
+FB-00067,2025-12-23,cust_8953,web,Payments,UPI payment failed but the money was debited from my account. Still not refunded.,1,negative,payment_reliability
+FB-00068,2025-12-23,cust_9280,email,Support,Nobody could tell me why my payment failed. Just kept transferring me.,2,negative,support_response
+FB-00069,2025-12-29,cust_1832,mobile_app,Checkout,"Checkout V2 is so much faster, I was done in about thirty seconds.",5,positive,checkout_friction
+FB-00070,2026-01-01,cust_8711,web,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00071,2026-01-01,cust_7371,call_center,Support,Nobody could tell me why my payment failed. Just kept transferring me.,1,negative,support_response
+FB-00072,2026-01-01,cust_7455,in_app_survey,Checkout,"Checkout V2 is so much faster, I was done in about thirty seconds.",5,positive,checkout_friction
+FB-00073,2026-01-02,cust_5573,call_center,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,2,negative,checkout_friction
+FB-00074,2026-01-02,cust_5681,web,Returns,Return flow in the app is confusing and no return label was generated.,2,negative,return_process
+FB-00075,2026-01-03,cust_8041,web,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,2,negative,checkout_friction
+FB-00076,2026-01-04,cust_8043,in_app_survey,Payments,"Paid through UPI, got a success screen, but no order was ever created.",1,negative,payment_reliability
+FB-00077,2026-01-04,cust_3414,mobile_app,Delivery,"Promised next-day delivery, it turned up five days later.",1,negative,delivery_delay
+FB-00078,2026-01-05,cust_3925,in_app_survey,Checkout,I lost my whole cart at the payment step. Had to start over from scratch.,1,negative,checkout_friction
+FB-00079,2026-01-06,cust_9890,email,App Performance,App freezes during checkout and I have to force close it.,1,negative,app_crash
+FB-00080,2026-01-07,cust_3503,web,App Performance,Latest update made the app extremely slow on my phone.,1,negative,app_crash
+FB-00081,2026-01-07,cust_7865,in_app_survey,Support,No reply to my email for five days now.,2,negative,support_response
+FB-00082,2026-01-08,cust_4501,in_app_survey,Delivery,Delivery is four days late and the tracking page has not updated at all.,2,negative,delivery_delay
+FB-00083,2026-01-08,cust_2193,email,Delivery,Tracking says delivered but nothing has reached me.,1,negative,delivery_delay
+FB-00084,2026-01-09,cust_2894,email,Checkout,"Could not check out as a guest, forced to create an account first. Frustrating.",2,negative,checkout_friction
+FB-00085,2026-01-10,cust_8119,call_center,Checkout,Checkout asked me to verify my address three times before it would accept it.,1,negative,checkout_friction
+FB-00086,2026-01-11,cust_4164,email,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,2,negative,checkout_friction
+FB-00087,2026-01-11,cust_1090,mobile_app,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,2,negative,delivery_delay
+FB-00088,2026-01-12,cust_8144,mobile_app,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,2,negative,checkout_friction
+FB-00089,2026-01-13,cust_9486,email,Search,"Search results show completely unrelated products, I cannot find what I need.",2,negative,search_relevance
+FB-00090,2026-01-14,cust_9785,call_center,Checkout,The coupon field at checkout is confusing and it emptied my basket when I applied it.,3,negative,checkout_friction
+FB-00091,2026-01-14,cust_7883,email,App Performance,Login screen gets stuck on a blank white page after the update.,2,negative,app_crash
+FB-00092,2026-01-14,cust_3223,email,Delivery,Arrived a day early and the packaging was in perfect condition.,5,positive,delivery_delay
+FB-00093,2026-01-15,cust_1653,call_center,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,1,negative,checkout_friction
+FB-00094,2026-01-15,cust_3938,call_center,Checkout,Checkout asked me to verify my address three times before it would accept it.,1,negative,checkout_friction
+FB-00095,2026-01-15,cust_9976,email,Search,Search returns the same sponsored items no matter what I type.,3,negative,search_relevance
+FB-00096,2026-01-15,cust_9849,mobile_app,App Performance,The app crashes every time I open the orders tab.,1,negative,app_crash
+FB-00097,2026-01-18,cust_6794,in_app_survey,Checkout,The coupon field at checkout is confusing and it emptied my basket when I applied it.,2,negative,checkout_friction
+FB-00098,2026-01-18,cust_8478,web,Search,"Filters do not apply properly, search keeps returning out-of-stock items.",1,negative,search_relevance
+FB-00099,2026-01-19,cust_9938,mobile_app,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,1,negative,checkout_friction
+FB-00100,2026-01-19,cust_4878,web,Checkout,I lost my whole cart at the payment step. Had to start over from scratch.,2,negative,checkout_friction
+FB-00101,2026-01-20,cust_2389,call_center,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,1,negative,delivery_delay
+FB-00102,2026-01-21,cust_6967,email,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,3,negative,checkout_friction
+FB-00103,2026-01-21,cust_7888,email,Payments,"Payment keeps failing at the last step with a generic error, no useful message.",1,negative,payment_reliability
+FB-00104,2026-01-21,cust_7291,email,Delivery,Delivery is four days late and the tracking page has not updated at all.,2,negative,delivery_delay
+FB-00105,2026-01-22,cust_5371,web,Checkout,"Could not check out as a guest, forced to create an account first. Frustrating.",2,negative,checkout_friction
+FB-00106,2026-01-22,cust_8999,web,Support,The agent disconnected twice and I had to explain everything again.,3,negative,support_response
+FB-00107,2026-01-22,cust_1444,mobile_app,Payments,"Saved card worked first try, payment confirmation came straight away.",5,positive,payment_reliability
+FB-00108,2026-01-23,cust_9540,email,Returns,Refund for my return is still pending after two weeks.,2,negative,return_process
+FB-00109,2026-01-24,cust_7653,in_app_survey,Payments,Card declined twice and then UPI failed too. Could not complete the purchase.,1,negative,payment_reliability
+FB-00110,2026-01-25,cust_6143,mobile_app,Payments,UPI payment failed but the money was debited from my account. Still not refunded.,1,negative,payment_reliability
+FB-00111,2026-01-25,cust_2530,web,Delivery,Package arrived late and the outer box was crushed.,3,negative,delivery_delay
+FB-00112,2026-01-25,cust_8251,in_app_survey,Search,Searching for an exact model number returns nothing useful.,1,negative,search_relevance
+FB-00113,2026-01-27,cust_8814,mobile_app,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,1,negative,support_response
+FB-00114,2026-01-28,cust_1158,mobile_app,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00115,2026-01-28,cust_6344,email,Payments,My UPI transaction has been pending for three days and the order is not confirmed.,1,negative,payment_reliability
+FB-00116,2026-01-29,cust_6728,call_center,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,2,negative,checkout_friction
+FB-00117,2026-01-29,cust_3091,in_app_survey,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,2,negative,support_response
+FB-00118,2026-01-30,cust_8373,call_center,Returns,Return pickup was rescheduled three times without informing me.,1,negative,return_process
+FB-00119,2026-02-01,cust_2524,call_center,Delivery,Tracking says delivered but nothing has reached me.,1,negative,delivery_delay
+FB-00120,2026-02-01,cust_5786,web,Returns,Return flow in the app is confusing and no return label was generated.,1,negative,return_process
+FB-00121,2026-02-01,cust_5658,email,Returns,"Had to call support just to start a return, the app would not let me.",1,negative,return_process
+FB-00122,2026-02-02,cust_8705,mobile_app,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,2,negative,checkout_friction
+FB-00123,2026-02-02,cust_4155,call_center,Search,"Filters do not apply properly, search keeps returning out-of-stock items.",1,negative,search_relevance
+FB-00124,2026-02-02,cust_7565,email,App Performance,Latest update made the app extremely slow on my phone.,1,negative,app_crash
+FB-00125,2026-02-03,cust_1841,call_center,App Performance,The app crashes every time I open the orders tab.,1,negative,app_crash
+FB-00126,2026-02-03,cust_2229,web,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,1,negative,support_response
+FB-00127,2026-02-04,cust_2419,call_center,Payments,"Paid through UPI, got a success screen, but no order was ever created.",1,negative,payment_reliability
+FB-00128,2026-02-04,cust_6016,in_app_survey,Delivery,Delivery is four days late and the tracking page has not updated at all.,2,negative,delivery_delay
+FB-00129,2026-02-05,cust_7043,web,Checkout,Checkout asked me to verify my address three times before it would accept it.,2,negative,checkout_friction
+FB-00130,2026-02-05,cust_6576,call_center,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,2,negative,delivery_delay
+FB-00131,2026-02-05,cust_1231,in_app_survey,Returns,Refund for my return is still pending after two weeks.,2,negative,return_process
+FB-00132,2026-02-06,cust_4673,mobile_app,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,3,negative,checkout_friction
+FB-00133,2026-02-06,cust_8532,web,Payments,My UPI transaction has been pending for three days and the order is not confirmed.,1,negative,payment_reliability
+FB-00134,2026-02-06,cust_3979,email,Delivery,Delivery is four days late and the tracking page has not updated at all.,1,negative,delivery_delay
+FB-00135,2026-02-07,cust_6363,web,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00136,2026-02-07,cust_7071,mobile_app,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,1,negative,checkout_friction
+FB-00137,2026-02-08,cust_2874,in_app_survey,Checkout,I lost my whole cart at the payment step. Had to start over from scratch.,1,negative,checkout_friction
+FB-00138,2026-02-08,cust_7209,call_center,Payments,"The app showed payment failed, so I paid again, and now I have been charged twice.",1,negative,payment_reliability
+FB-00139,2026-02-08,cust_5871,in_app_survey,Support,No reply to my email for five days now.,2,negative,support_response
+FB-00140,2026-02-09,cust_5425,in_app_survey,Payments,"Payment keeps failing at the last step with a generic error, no useful message.",2,negative,payment_reliability
+FB-00141,2026-02-09,cust_6632,email,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,2,negative,delivery_delay
+FB-00142,2026-02-10,cust_1986,in_app_survey,Support,The agent disconnected twice and I had to explain everything again.,2,negative,support_response
+FB-00143,2026-02-10,cust_1534,web,Payments,"Saved card worked first try, payment confirmation came straight away.",4,positive,payment_reliability
+FB-00144,2026-02-12,cust_4978,mobile_app,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,2,negative,checkout_friction
+FB-00145,2026-02-12,cust_8434,call_center,Search,"Search results show completely unrelated products, I cannot find what I need.",3,negative,search_relevance
+FB-00146,2026-02-13,cust_7211,call_center,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,1,negative,checkout_friction
+FB-00147,2026-02-14,cust_8381,in_app_survey,Checkout,"Checkout V2 is so much faster, I was done in about thirty seconds.",5,positive,checkout_friction
+FB-00148,2026-02-15,cust_7882,email,Payments,UPI payment failed but the money was debited from my account. Still not refunded.,3,negative,payment_reliability
+FB-00149,2026-02-17,cust_6096,mobile_app,Checkout,"Could not check out as a guest, forced to create an account first. Frustrating.",1,negative,checkout_friction
+FB-00150,2026-02-18,cust_4266,mobile_app,Checkout,The coupon field at checkout is confusing and it emptied my basket when I applied it.,1,negative,checkout_friction
+FB-00151,2026-02-18,cust_4457,call_center,Support,Nobody could tell me why my payment failed. Just kept transferring me.,1,negative,support_response
+FB-00152,2026-02-19,cust_9595,in_app_survey,Search,Search returns the same sponsored items no matter what I type.,2,negative,search_relevance
+FB-00153,2026-02-19,cust_2395,web,App Performance,Login screen gets stuck on a blank white page after the update.,1,negative,app_crash
+FB-00154,2026-02-21,cust_4697,in_app_survey,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,1,negative,support_response
+FB-00155,2026-02-22,cust_8136,in_app_survey,Payments,Card declined twice and then UPI failed too. Could not complete the purchase.,3,negative,payment_reliability
+FB-00156,2026-02-22,cust_4937,email,Delivery,"Promised next-day delivery, it turned up five days later.",2,negative,delivery_delay
+FB-00157,2026-02-23,cust_4130,mobile_app,Delivery,Package arrived late and the outer box was crushed.,1,negative,delivery_delay
+FB-00158,2026-02-23,cust_5632,email,Delivery,Arrived a day early and the packaging was in perfect condition.,5,positive,delivery_delay
+FB-00159,2026-02-24,cust_7149,email,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00160,2026-02-24,cust_2983,in_app_survey,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,1,negative,checkout_friction
+FB-00161,2026-02-25,cust_1878,web,App Performance,App freezes during checkout and I have to force close it.,1,negative,app_crash
+FB-00162,2026-02-27,cust_4033,web,Search,Searching for an exact model number returns nothing useful.,1,negative,search_relevance
+FB-00163,2026-02-28,cust_4180,call_center,Returns,Return pickup was rescheduled three times without informing me.,1,negative,return_process
+FB-00164,2026-03-01,cust_1803,in_app_survey,Checkout,"Checkout V2 is so much faster, I was done in about thirty seconds.",5,positive,checkout_friction
+FB-00165,2026-03-02,cust_3522,email,Payments,"Paid through UPI, got a success screen, but no order was ever created.",1,negative,payment_reliability
+FB-00166,2026-03-02,cust_2646,email,App Performance,The app crashes every time I open the orders tab.,1,negative,app_crash
+FB-00167,2026-03-03,cust_6039,in_app_survey,Checkout,Too many steps to buy one item. The checkout flow is unnecessarily complicated.,1,negative,checkout_friction
+FB-00168,2026-03-03,cust_7717,web,Search,Search returns the same sponsored items no matter what I type.,1,negative,search_relevance
+FB-00169,2026-03-05,cust_8178,email,Payments,My UPI transaction has been pending for three days and the order is not confirmed.,3,negative,payment_reliability
+FB-00170,2026-03-05,cust_6546,in_app_survey,Returns,Return pickup was rescheduled three times without informing me.,1,negative,return_process
+FB-00171,2026-03-05,cust_4263,email,Support,Nobody could tell me why my payment failed. Just kept transferring me.,1,negative,support_response
+FB-00172,2026-03-06,cust_2899,email,Payments,"The app showed payment failed, so I paid again, and now I have been charged twice.",1,negative,payment_reliability
+FB-00173,2026-03-06,cust_8056,web,App Performance,App freezes during checkout and I have to force close it.,1,negative,app_crash
+FB-00174,2026-03-06,cust_5901,email,Support,The agent disconnected twice and I had to explain everything again.,1,negative,support_response
+FB-00175,2026-03-07,cust_6460,call_center,Payments,"Payment keeps failing at the last step with a generic error, no useful message.",1,negative,payment_reliability
+FB-00176,2026-03-07,cust_6881,in_app_survey,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,1,negative,support_response
+FB-00177,2026-03-07,cust_5106,web,Search,Search found the exact model I wanted on the first try.,5,positive,search_relevance
+FB-00178,2026-03-08,cust_5982,email,Checkout,Checkout page hangs on mobile and then abandons my cart. Very annoying.,1,negative,checkout_friction
+FB-00179,2026-03-08,cust_8172,mobile_app,Checkout,The coupon field at checkout is confusing and it emptied my basket when I applied it.,1,negative,checkout_friction
+FB-00180,2026-03-09,cust_6927,in_app_survey,Payments,Wallet balance was deducted but the order failed. Support has not returned the money.,2,negative,payment_reliability
+FB-00181,2026-03-09,cust_3369,email,Payments,UPI collect request just times out. Tried four times with two different banks.,1,negative,payment_reliability
+FB-00182,2026-03-11,cust_3441,call_center,Checkout,Why do I have to re-enter my card details every single time at checkout? Takes forever.,1,negative,checkout_friction
+FB-00183,2026-03-11,cust_1339,call_center,Checkout,Checkout asked me to verify my address three times before it would accept it.,1,negative,checkout_friction
+FB-00184,2026-03-11,cust_4920,web,Payments,"Payment keeps failing at the last step with a generic error, no useful message.",1,negative,payment_reliability
+FB-00185,2026-03-11,cust_5708,web,Returns,"Had to call support just to start a return, the app would not let me.",1,negative,return_process
+FB-00186,2026-03-11,cust_5161,email,Support,Support chat kept me waiting forty minutes and then closed without a resolution.,1,negative,support_response
+FB-00187,2026-03-13,cust_9903,email,Delivery,"Promised next-day delivery, it turned up five days later.",2,negative,delivery_delay
+FB-00188,2026-03-13,cust_7730,mobile_app,Delivery,Delivery is four days late and the tracking page has not updated at all.,2,negative,delivery_delay
+FB-00189,2026-03-15,cust_9889,email,Payments,UPI collect request just times out. Tried four times with two different banks.,3,negative,payment_reliability
+FB-00190,2026-03-15,cust_1753,call_center,App Performance,Latest update made the app extremely slow on my phone.,1,negative,app_crash
+FB-00191,2026-03-16,cust_4335,call_center,Payments,UPI payment failed but the money was debited from my account. Still not refunded.,1,negative,payment_reliability
+FB-00192,2026-03-16,cust_5689,web,Payments,"Saved card worked first try, payment confirmation came straight away.",5,positive,payment_reliability
+FB-00193,2026-03-19,cust_9229,in_app_survey,Search,"Filters do not apply properly, search keeps returning out-of-stock items.",1,negative,search_relevance
+FB-00194,2026-03-20,cust_8708,in_app_survey,Payments,UPI payment failed but the money was debited from my account. Still not refunded.,1,negative,payment_reliability
+FB-00195,2026-03-20,cust_8141,email,Payments,My UPI transaction has been pending for three days and the order is not confirmed.,1,negative,payment_reliability
+FB-00196,2026-03-20,cust_3785,web,App Performance,Login screen gets stuck on a blank white page after the update.,2,negative,app_crash
+FB-00197,2026-03-21,cust_4912,in_app_survey,Delivery,Tracking says delivered but nothing has reached me.,1,negative,delivery_delay
+FB-00198,2026-03-23,cust_4241,email,Checkout,Checkout is a nightmare - six screens and it kept resetting my saved address. I gave up twice.,1,negative,checkout_friction
+FB-00199,2026-03-23,cust_7807,email,Payments,"The app showed payment failed, so I paid again, and now I have been charged twice.",1,negative,payment_reliability
+FB-00200,2026-03-24,cust_5891,in_app_survey,Delivery,Ordered a week ago and it still has not shipped. No update from anyone.,1,negative,delivery_delay
+FB-00201,2026-03-24,cust_1359,email,Support,No reply to my email for five days now.,1,negative,support_response
+FB-00202,2026-03-25,cust_5102,mobile_app,Checkout,I lost my whole cart at the payment step. Had to start over from scratch.,1,negative,checkout_friction
+FB-00203,2026-03-25,cust_7744,email,Payments,Card declined twice and then UPI failed too. Could not complete the purchase.,1,negative,payment_reliability
+FB-00204,2026-03-25,cust_9742,email,Returns,Refund for my return is still pending after two weeks.,2,negative,return_process
+FB-00205,2026-03-26,cust_6772,web,Delivery,Arrived a day early and the packaging was in perfect condition.,5,positive,delivery_delay
+FB-00206,2026-03-27,cust_1601,email,Payments,"Paid through UPI, got a success screen, but no order was ever created.",1,negative,payment_reliability
+FB-00207,2026-03-27,cust_7325,web,Search,"Search results show completely unrelated products, I cannot find what I need.",2,negative,search_relevance
+FB-00208,2026-03-27,cust_4945,email,App Performance,The app crashes every time I open the orders tab.,1,negative,app_crash
+FB-00209,2026-03-28,cust_2527,web,Payments,Card declined twice and then UPI failed too. Could not complete the purchase.,1,negative,payment_reliability
+FB-00210,2026-03-28,cust_6568,in_app_survey,Delivery,Delivery is four days late and the tracking page has not updated at all.,1,negative,delivery_delay
+FB-00211,2026-03-29,cust_9824,email,Delivery,Package arrived late and the outer box was crushed.,1,negative,delivery_delay
+FB-00212,2026-03-29,cust_2633,in_app_survey,Search,Searching for an exact model number returns nothing useful.,2,negative,search_relevance
+FB-00213,2026-03-29,cust_5712,in_app_survey,Support,No reply to my email for five days now.,1,negative,support_response
+FB-00214,2026-03-30,cust_9864,mobile_app,Returns,Return flow in the app is confusing and no return label was generated.,2,negative,return_process
+FB-00215,2026-03-31,cust_3236,mobile_app,Payments,Wallet balance was deducted but the order failed. Support has not returned the money.,2,negative,payment_reliability

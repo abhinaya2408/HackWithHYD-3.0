@@ -1,0 +1,23 @@
+# Secrets — never commit
+.env
+.env.local
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Raw external datasets (large Kaggle TSVs are downloaded by the user, never committed)
+data/raw/
+
+# Embedded Hindsight / Postgres leftovers
+.pg0/
+*.log
